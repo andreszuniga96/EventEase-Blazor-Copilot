@@ -1,0 +1,34 @@
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@registrationModel" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <InputText @bind-Value="registrationModel.Email" />
+        <ValidationMessage For="@(() => registrationModel.Email)" />
+    </div>
+
+    <!-- Rest of your form -->
+</EditForm>
+
+@code {
+    private RegistrationModel registrationModel = new();
+
+    private void HandleSubmit()
+    {
+        Console.WriteLine($"Registered: {registrationModel.Name} ({registrationModel.Email})");
+    }
+
+    public class RegistrationModel
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Name { get; set; } = string.Empty;
+    }
+}

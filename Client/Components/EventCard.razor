@@ -1,0 +1,31 @@
+<div class="event-card p-4 border rounded mb-4">
+    <h3>@EventName</h3>
+    <div class="mb-2">
+        <label>Date:</label>
+        <input type="date" class="form-control" @bind="EventDate" />
+    </div>
+    <div class="mb-2">
+        <label>Description:</label>
+        <textarea class="form-control" @bind="Description"></textarea>
+    </div>
+    <button class="btn btn-primary" @onclick="NotifyChanged">Save</button>
+</div>
+
+@code {
+    [Parameter]
+    public string EventName { get; set; } = "New Event";
+
+    [Parameter]
+    public DateTime EventDate { get; set; } = DateTime.Now;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback OnChange { get; set; }
+
+    private async Task NotifyChanged()
+    {
+        await OnChange.InvokeAsync();
+    }
+}

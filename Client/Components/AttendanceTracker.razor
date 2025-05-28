@@ -1,0 +1,16 @@
+@using System.Collections.ObjectModel
+
+<div class="p-4 border rounded">
+    <h4>Attendees: @Attendees.Count</h4>
+    <ul class="list-group mb-3">
+        @foreach (var attendee in Attendees)
+        {
+            <li class="list-group-item">@attendee</li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter]
+    public ObservableCollection<string> Attendees { get; set; } = new();
+}

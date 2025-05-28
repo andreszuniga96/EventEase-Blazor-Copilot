@@ -1,0 +1,13 @@
+@page "/events"
+
+<h3>Events</h3>
+
+@code {
+    private string eventDescription = "Annual developer conference";
+    private System.Collections.ObjectModel.ObservableCollection<string> currentAttendees = new();
+
+    private void RefreshList()
+    {
+        Console.WriteLine("Event updated!");
+    }
+}
